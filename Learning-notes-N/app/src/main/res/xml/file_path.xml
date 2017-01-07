@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+    <paths>
+        <!--path :目录 ，name ：这个目录在我们用FileProvider共享出的uri中的值-->
+        <!--当来源不确定，可以将path赋值为空，这样的话，根据path类型，分别代表访问这个path下的所有文件及子目录-->
+        <!--例如配合files-path，访问Context.getFilesDir()下所有文件及子目录。
+            配合external-path，访问外部存储空间下所有文件及子目录。
+            配合cache-path，访问应用缓存目录所有文件及子目录-->
+
+
+        <!--共享的是在我们应用的内部存储目录-->
+        <!--相当于  Context.getFilesDir()-->
+        <files-path
+            name=""
+            path="file" />
+        <!--共享的是外部存储-->
+        <!--相当于  Environment.getExternalStorageDirectory()-->
+        <external-path
+            name=""
+            path="external" />
+        <!--共享的是缓存目录-->
+        <!--相当于  getCacheDir()-->
+        <cache-path
+            name=""
+            path="cache" />
+    </paths>
+</resources>
