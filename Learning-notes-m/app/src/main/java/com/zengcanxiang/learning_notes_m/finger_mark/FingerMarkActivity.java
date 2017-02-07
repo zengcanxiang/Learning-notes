@@ -26,7 +26,7 @@ import static android.os.Build.VERSION_CODES.M;
  */
 public class FingerMarkActivity extends AppCompatActivity {
     TextView text;
-    Button btn;
+    Button btn, btn2;
     FingerprintManager manager;
     FingerprintManager.AuthenticationCallback callback;
     CancellationSignal cancellationSignal;
@@ -38,7 +38,7 @@ public class FingerMarkActivity extends AppCompatActivity {
         setContentView(R.layout.main);
         text = (TextView) findViewById(R.id.text);
         btn = (Button) findViewById(R.id.btn);
-        manager = (FingerprintManager) this.getSystemService(Context.FINGERPRINT_SERVICE);
+        btn2 = (Button) findViewById(R.id.btn2);
         cancellationSignal = new CancellationSignal();
         callback = new FingerprintManager.AuthenticationCallback() {
 
@@ -54,7 +54,7 @@ public class FingerMarkActivity extends AppCompatActivity {
 
             @Override
             public void onAuthenticationError(int errorCode, CharSequence errString) {
-                text.setText("指纹识别状态:错误，短时间(30秒)不能再次验证");
+                text.setText("指纹识别状态:错误，" + errString);
             }
 
             @Override
@@ -62,16 +62,28 @@ public class FingerMarkActivity extends AppCompatActivity {
                 text.setText("指纹识别状态:失败，指纹没有识别出来");
             }
         };
+        cancellationSignal.setOnCancelListener(new CancellationSignal.OnCancelListener() {
+            @Override
+            public void onCancel() {
+                text.setText("指纹识别状态:指纹识别取消");
+            }
+        });
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 checkFingerMarkPermission();
             }
         });
+        btn2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                cancellationSignal.cancel();
+            }
+        });
     }
 
     private void checkFingerMarkPermission() {
-        //判断权限支持
+        //指纹识别是普通权限，不需要申请
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.USE_FINGERPRINT) == PackageManager.PERMISSION_GRANTED) {
             fingerMark();
         } else {
@@ -83,22 +95,23 @@ public class FingerMarkActivity extends AppCompatActivity {
     @SuppressWarnings("all")
     @TargetApi(Build.VERSION_CODES.M)
     private void fingerMark() {
+        manager = (FingerprintManager) this.getSystemService(Context.FINGERPRINT_SERVICE);
         //判断API版本
         if (Build.VERSION.SDK_INT < M) {
-            Log.d("TAG", "不支持运行与APi23以下的版本");
+            text.setText("指纹识别状态:不支持运行与APi23以下的版本");
             return;
         }
         //判断硬件是否支持
         if (!manager.isHardwareDetected()) {
-            Log.d("TAG", "手机不支持指纹识别");
+            text.setText("指纹识别状态:手机不支持指纹识别");
             return;
         }
         //判断是否已经录入了指纹
         if (!manager.hasEnrolledFingerprints()) {
-            Log.d("TAG", "手机没有录入至少一个指纹");
+            text.setText("指纹识别状态:手机没有录入至少一个指纹");
             return;
         }
-        Log.d("TAG", "启动指纹识别");
+        text.setText("指纹识别状态:启动指纹识别");
         //启动指纹识别
         manager.authenticate(null, null, 0, callback, null);
     }
@@ -125,7 +138,6 @@ public class FingerMarkActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        Log.d("TAG", "退出该界面，取消指纹识别");
         cancellationSignal.cancel();
     }
 }
