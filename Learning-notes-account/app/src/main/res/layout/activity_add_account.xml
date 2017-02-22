@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <EditText
+        android:id="@+id/addAccountName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="账户名" />
+
+    <EditText
+        android:id="@+id/addAccountPwd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="密码"
+        android:inputType="textPassword" />
+
+    <Button
+        android:id="@+id/addAccountConfirm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="确定" />
+</LinearLayout>
