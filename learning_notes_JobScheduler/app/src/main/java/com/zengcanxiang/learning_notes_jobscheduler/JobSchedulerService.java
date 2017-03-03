@@ -54,7 +54,7 @@ public class JobSchedulerService extends JobService {
                     sendMessage(MSG_STOP, params.getJobId());
                     jobFinished(params, false);
                 }
-            }, 500);
+            }, 0);
             return true;
         } else {
             sendMessage(MSG_STOP, params.getJobId());
@@ -93,4 +93,7 @@ public class JobSchedulerService extends JobService {
             Log.e(TAG, "Error passing service object back to activity.");
         }
     }
+
+
+
 }

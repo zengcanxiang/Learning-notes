@@ -5,10 +5,8 @@ import android.app.job.JobScheduler;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.IBinder;
 import android.os.Message;
 import android.os.Messenger;
 import android.support.annotation.Nullable;
@@ -28,19 +26,6 @@ public class Main extends AppCompatActivity {
 
     private IncomingMessageHandler mHandler;
     private int mJobId = 0;
-
-    private ServiceConnection connection = new ServiceConnection() {
-
-        @Override
-        public void onServiceDisconnected(ComponentName name) {
-//            messengerIncoming = null;
-        }
-
-        @Override
-        public void onServiceConnected(ComponentName name, IBinder service) {
-//            messengerIncoming = new Messenger(service);
-        }
-    };
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -77,8 +62,8 @@ public class Main extends AppCompatActivity {
 //                builder.setOverrideDeadline(2000);
 
                 //设置重复时间,每隔多少时间执行一次,与setMinimumLatency()、setOverrideDeadline()方法不能同时调用
-                //如果使用startService()+setPeriodic()方式启动JobService，无法进入onStartJob()方法。
-                builder.setPeriodic(300);
+                //模拟器不执行循环
+                builder.setPeriodic(1000 * 60);
 
                 int result = scheduler.schedule(builder.build());
                 if (result < 0) {
@@ -97,14 +82,12 @@ public class Main extends AppCompatActivity {
         Intent startServiceIntent = new Intent(this, JobSchedulerService.class);
         Messenger messengerIncoming = new Messenger(mHandler);
         startServiceIntent.putExtra("messenger", messengerIncoming);
-//        startService(startServiceIntent);
-        bindService(startServiceIntent, connection, BIND_AUTO_CREATE);
+        startService(startServiceIntent);
     }
 
     @Override
     protected void onStop() {
-//        stopService(new Intent(this, JobSchedulerService.class));
-        unbindService(connection);
+        stopService(new Intent(this, JobSchedulerService.class));
         super.onStop();
     }
 
