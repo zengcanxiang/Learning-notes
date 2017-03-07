@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--静态配置测试：如果修改静态配置的数据，覆盖安装发现不会进行改变，需要卸载安装-->
+    <shortcut
+        android:enabled="true"
+        android:icon="@mipmap/ic_launcher"
+        android:shortcutDisabledMessage="@string/shortcut_toast_msg"
+        android:shortcutId="settings"
+        android:shortcutLongLabel="@string/shortcut_name_long"
+        android:shortcutShortLabel="@string/shortcut_name_short">
+
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetClass="com.zengcanxiang.learning_notes_n.shortcuts.Shortcuts1Activity"
+            android:targetPackage="com.zengcanxiang.learning_notes_n" />
+        <categories android:name="android.shortcut.conversation" />
+    </shortcut>
+</shortcuts>

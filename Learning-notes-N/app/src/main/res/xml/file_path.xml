@@ -7,21 +7,20 @@
             配合external-path，访问外部存储空间下所有文件及子目录。
             配合cache-path，访问应用缓存目录所有文件及子目录-->
 
-
         <!--共享的是在我们应用的内部存储目录-->
         <!--相当于  Context.getFilesDir()-->
         <files-path
-            name=""
-            path="file" />
+            name="file"
+            path="" />
         <!--共享的是外部存储-->
         <!--相当于  Environment.getExternalStorageDirectory()-->
         <external-path
-            name=""
-            path="external" />
+            name="external"
+            path="" />
         <!--共享的是缓存目录-->
         <!--相当于  getCacheDir()-->
         <cache-path
-            name=""
-            path="cache" />
+            name="cache"
+            path="" />
     </paths>
 </resources>

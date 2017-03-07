@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/fileProvider"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="fileProvider" />
+
+    <Button
+        android:id="@+id/notify"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="直接回复NOTIfY" />
+
+    <Button
+        android:id="@+id/initShortcuts"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="初始shortcuts" />
+
+    <Button
+        android:id="@+id/addShortcuts"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="添加shortcuts" />
+
+    <Button
+        android:id="@+id/delShortcuts"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="删除shortcuts" />
+
+    <Button
+        android:id="@+id/updateShortcuts"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="更新shortcuts" />
+</LinearLayout>
