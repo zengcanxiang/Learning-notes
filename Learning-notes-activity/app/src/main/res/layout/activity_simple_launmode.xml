@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="toLaunchModeActivity"
+        android:text="测试SingleTop启动模式(打开自己)" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="toLaunchMode2Activity"
+        android:text="测试SingleTask启动模式(打开mode2)" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="toLaunchMode3Activity"
+        android:text="测试SingleInstance启动模式(打开mode3)" />
+</LinearLayout>
